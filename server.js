@@ -2,11 +2,12 @@ import express from 'express';
 import session from 'express-session';
 import './helper/passport.js'; // Passport configuration
 import connectDb from "./Db/connect.js"
-import authRoutes from "./routes/auth/index.js"
-import uploadRoutes from "./routes/upload/index.js"
+import authRoutes from "./routes/v1/auth/index.js"
+// import uploadRoutes from "./routes/upload/index.js"
 import cookieParser from 'cookie-parser';
 import cors from "cors"
 import { config } from "dotenv";
+import swaggerDocs from './swagger.js';
 
 config({
   path: ".env"
@@ -33,18 +34,20 @@ app.use(session({
   cookie: { maxAge: 3600000 * 24 }
 }))
 
-// Serve uploaded files from the 'uploads' directory
-app.use('/uploads', express.static('uploads'));
 
-// route middlware
+// Serve uploaded files from the 'uploads' directory
+// app.use('/uploads', express.static('uploads'));
+
+// // route middlware
 app.use('/api/auth', authRoutes);
-app.use('/api/uploads', uploadRoutes);
+// app.use('/api/uploads', uploadRoutes);
 
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
+swaggerDocs(app, PORT);
 // databse connection 
 const databaseConnection = async () => {
   try {
