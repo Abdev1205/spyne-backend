@@ -18,7 +18,7 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
     sameSite: 'None',
   });
 
-  res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
+  res.redirect(`${process.env.FRONTEND_URL}/`);
 });
 
 router.post('/register', register);
