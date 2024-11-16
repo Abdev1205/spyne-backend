@@ -1,6 +1,5 @@
-import { CreateFile, getfile, searchFiles } from "./file.js";
-import { CreateFolder, getAllFolders, getFilesByUserAndFolder, getFolderById } from './folder.js'
+import { uploadImage } from "./image";
 
 export {
-  CreateFile, getfile, CreateFolder, getAllFolders, getFilesByUserAndFolder, getFolderById, searchFiles
+  uploadImage
 }

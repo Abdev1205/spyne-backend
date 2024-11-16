@@ -3,7 +3,8 @@ import session from 'express-session';
 import './helper/passport.js'; // Passport configuration
 import connectDb from "./Db/connect.js"
 import authRoutes from "./routes/v1/auth/index.js"
-// import uploadRoutes from "./routes/upload/index.js"
+import uploadRoutes from "./routes/v1/upload/index.js"
+import carRoutes from "./routes/v1/car/index.js"
 import cookieParser from 'cookie-parser';
 import cors from "cors"
 import { config } from "dotenv";
@@ -40,7 +41,8 @@ app.use(session({
 
 // // route middlware
 app.use('/api/auth', authRoutes);
-// app.use('/api/uploads', uploadRoutes);
+app.use('/api/uploads', uploadRoutes);
+app.use('/api/car', carRoutes);
 
 
 app.listen(PORT, () => {
