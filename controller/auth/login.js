@@ -25,6 +25,7 @@ const login = async (req, res) => {
     const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "7day" });
     console.log("body : ", req.body, "\n token : ", token);
     res.cookie('accessToken', token, {
+      maxAge: 3600000 * 24,
       httpOnly: true,
       secure: true,
       sameSite: 'None',
