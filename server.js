@@ -28,12 +28,24 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser())
+// app.use(session({
+//   resave: true,
+//   saveUninitialized: true,
+//   secret: "abhaymishra",
+//   cookie: { maxAge: 3600000 * 24 }
+// }))
+
 app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: "abhaymishra",
-  cookie: { maxAge: 3600000 * 24 }
-}))
+  cookie: {
+    maxAge: 3600000 * 24, // 1 day
+    httpOnly: true,       // Cookie is only accessible via HTTP(S), not JavaScript
+    secure: process.env.NODE_ENV === 'production', // Ensure secure cookies in production
+    sameSite: 'None',     // Crucial for cross-origin requests
+  }
+}));
 
 
 // route middlware
