@@ -4,7 +4,7 @@ const logout = async (req, res, next) => {
       .status(200)
       .cookie('accessToken', false, {
         httpOnly: true,
-        secure: true, // Ensures secure cookies in production
+        secure: true,
         sameSite: 'None',
       })
       .clearCookie('accessToken')

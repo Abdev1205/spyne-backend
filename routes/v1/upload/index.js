@@ -8,7 +8,15 @@ import verifyToken from "../../../middleware/verifyToken.js"
 const router = Router();
 const upload = multer({ storage })
 
-// router.post('/upload/image', verifyToken, upload.single('image') , uploadImage);
+/**
+ * @openapi
+ * /upload/images:
+ *   post:
+ *     description: Upload an image
+ *     responses:
+ *       200:
+ *         description: Image uploaded successfully
+ */
 router.post('/images', upload.single('image'), uploadImage);
 
 

@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cors({
     origin: [process.env.FRONTEND_URL],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   })
 );
@@ -36,10 +36,7 @@ app.use(session({
 }))
 
 
-// Serve uploaded files from the 'uploads' directory
-// app.use('/uploads', express.static('uploads'));
-
-// // route middlware
+// route middlware
 app.use('/api/auth', authRoutes);
 app.use('/api/uploads', uploadRoutes);
 app.use('/api/car', carRoutes);

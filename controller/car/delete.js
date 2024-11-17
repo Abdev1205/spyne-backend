@@ -14,7 +14,7 @@ const deleteCar = async (req, res) => {
 
 const deleteCarImage = async (req, res) => {
   try {
-    const { imageUrl } = req.body;  // Get image URL from the request body
+    const { imageUrl } = req.body;
     const carId = req.params.carId;
     console.log("image url: " + imageUrl);
 
@@ -23,13 +23,11 @@ const deleteCarImage = async (req, res) => {
       return res.status(404).json({ message: "Car not found" });
     }
 
-    // Check if the image is in the car's images array
     const index = car.images.indexOf(imageUrl);
     if (index === -1) {
       return res.status(404).json({ message: "Image not found in car" });
     }
 
-    // Remove the image from the array
     car.images.splice(index, 1);
     await car.save();
 
