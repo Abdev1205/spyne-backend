@@ -26,7 +26,7 @@ const login = async (req, res) => {
     console.log("body : ", req.body, "\n token : ", token);
     res.cookie('accessToken', token, {
       httpOnly: true,
-      secure: true,
+      secure: false,
       sameSite: 'None',
     });
 
