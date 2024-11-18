@@ -35,15 +35,16 @@ app.use(cookieParser())
 //   cookie: { maxAge: 3600000 * 24 }
 // }))
 
+
 app.use(session({
-  resave: true,
-  saveUninitialized: true,
-  secret: "abhaymishra",
+  resave: false, // Recommended setting
+  saveUninitialized: false, // Recommended setting
+  secret: process.env.SESSION_SECRET || "abhaymishra", // Use an environment variable for security
   cookie: {
     maxAge: 3600000 * 24, // 1 day
-    httpOnly: true,       // Cookie is only accessible via HTTP(S), not JavaScript
-    secure: process.env.NODE_ENV === 'production', // Ensure secure cookies in production
-    sameSite: 'None',     // Crucial for cross-origin requests
+    secure: process.env.NODE_ENV === 'production', // Ensure cookies are sent over HTTPS in production
+    httpOnly: true, // Helps mitigate XSS attacks
+    sameSite: 'lax' // Adjust as needed (e.g., 'strict' or 'none')
   }
 }));
 
