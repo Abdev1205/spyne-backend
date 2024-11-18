@@ -26,9 +26,10 @@ const PORT = process.env.PORT || 5000;
 //     credentials: true,
 //   })
 // );
+// origin: "https://spyne-frontend-three.vercel.app", // Frontend URL
 
 const corsOptions = {
-  origin: "https://spyne-frontend-three.vercel.app", // Frontend URL
+  origin: "http://localhost:3000", // Frontend URL
   credentials: true, // Allow cookies and credentials
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'], // Allowed methods
   allowedHeaders: [

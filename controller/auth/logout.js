@@ -2,11 +2,11 @@ const logout = async (req, res, next) => {
   try {
     res
       .status(200)
-      .cookie('accessToken', false, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'None',
-      })
+      // .cookie('accessToken', false, {
+      //   httpOnly: true,
+      //   secure: true,
+      //   sameSite: 'None',
+      // })
       .clearCookie('accessToken')
 
       .json({
