@@ -19,13 +19,38 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // all middlewares
-app.use(
-  cors({
-    origin: [process.env.FRONTEND_URL],
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: [process.env.FRONTEND_URL],
+//     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+//     credentials: true,
+//   })
+// );
+
+const corsOptions = {
+  origin: "https://spyne-frontend-three.vercel.app", // Frontend URL
+  credentials: true, // Allow cookies and credentials
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'], // Allowed methods
+  allowedHeaders: [
+    'Authorization',
+    'Content-Type',
+    'Accept',
+    'Cache-Control',
+    'DNT',
+    'If-Modified-Since',
+    'Keep-Alive',
+    'Origin',
+    'User-Agent',
+    'X-Requested-With',
+    'company-code'
+  ],
+  exposedHeaders: ['Content-Length', 'Content-Range'],
+  optionsSuccessStatus: 204 // Some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+// Apply CORS middleware before other middleware and routes
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(cookieParser())
 // app.use(session({
@@ -47,6 +72,9 @@ app.use(session({
     sameSite: 'lax' // Adjust as needed (e.g., 'strict' or 'none')
   }
 }));
+
+// Handle preflight OPTIONS requests for all routes
+app.options('*', cors(corsOptions));
 
 
 // route middlware
